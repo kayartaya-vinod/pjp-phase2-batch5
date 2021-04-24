@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product list</title>
+
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/4/yeti/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="alert alert-primary">
+      <div class="container">
+        <h1>Full stack application demo</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Product list</h2>
+
+      <ul id="plist"></ul>
+    </div>
+
+    <script>
+      var url = "http://localhost:8080/api/products";
+
+      fetch(url)
+        .then((data) => data.json())
+        .then((data) => {
+          var out = "";
+          data.forEach((p) => {
+            out += "<li>" + p.description + " (₹ " + p.unitPrice + ")" + "</li>";
+          });
+          document.getElementById("plist").innerHTML = out;
+        })
+        .catch(console.error);
+    </script>
+  </body>
+</html>
